@@ -6,9 +6,7 @@ int main(){
     for(int i=0; i<4; i++){
         if(!TLinkedList_insert(L1, V[i]))
             printf("Não consegui inserir o V[%d]=%d\n", i, V[i]);
-        TLinkedList_print(L1);
     }
-    
-
+    TLinkedList_print(L1);
     return 0;
 }
