@@ -46,10 +46,8 @@ void TCircularList_print(TCircularList* lista){
 
 _Bool TCircularList_remove_after_n_steps(TCircularList* lista, int n){
     if(lista->fim == NULL) return false;
-
     TNo* x = lista->fim->prox;
     TNo* y = lista->fim;
-
     for(int i=0; i<n; i++){
         y = x;
         x = x->prox;
