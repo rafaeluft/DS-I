@@ -13,35 +13,35 @@ Stack* Stack_create(){
     nova->index = -1;
   } return nova;
 }
-int Stack_push(Stack* stack, int info){
+bool Stack_push(Stack* stack, int info){
   if (!Stack_full(stack)){
     stack->index++;
     stack->data[stack->index] = info;
-    return 1;
-  } return 0; //overflow
+    return true;
+  } return false; //overflow
 }
 
-int Stack_pop(Stack* stack, int* info){
+bool Stack_pop(Stack* stack, int* info){
   if(!Stack_empty(stack)){
     *info = stack->data[stack->index];
     stack->index--;
-    return 1;
-  } return 0; //underflow
+    return true;
+  } return false; //underflow
 }
-int Stack_head(Stack* stack, int* info){
+bool Stack_head(Stack* stack, int* info){
   if(!Stack_empty(stack)){
     *info = stack->data[stack->index];
-    return 1;
-  } return 0;
+    return true;
+  } return false;
 }
 void Stack_destroy(Stack* stack){
   free(stack);
 }
-int Stack_full(Stack* stack){
+bool Stack_full(Stack* stack){
   return stack->index==MAX-1;
 }
 
-int Stack_empty(Stack* stack){
+bool Stack_empty(Stack* stack){
   return stack->index == -1;
 }
 

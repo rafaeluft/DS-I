@@ -1,6 +1,7 @@
 #include "Stack.h"
 #include <stdlib.h>
 #include<stdio.h>
+
 typedef struct no{
   int info;
   struct no* prox;
@@ -26,39 +27,43 @@ Stack* Stack_create(){
     nova->qty = 0;
   }return nova;
 }
-int Stack_push(Stack* stack, int info){
+bool Stack_push(Stack* stack, int info){
   TNo* novo = TNo_create_n_fill(info);
-  if(!novo) return 0; //overflow
+  if(novo==NULL) return false; //overflow
   novo->prox = stack->inicio;
   stack->inicio = novo;
   stack->qty++;
-  return 1;
+  return true;
 }
-int Stack_pop(Stack* stack, int* info){
-  if( Stack_empty(stack) == 1 ){
+bool  Stack_pop(Stack* stack, int *info){
+  if(!Stack_empty(stack)){
     //printf("Stack_pop info: %d\n", stack->inicio->info);
     (*info) = stack->inicio->info;
     TNo* aux = stack->inicio;
     stack->inicio = stack->inicio->prox;
     free(aux);
     stack->qty--;
-    return 1;
-  } return 0;
+    return true;
+  } return false;
 }
-int Stack_head(Stack* stack, int* info){
-    if(!Stack_empty(stack)){
+bool Stack_head(Stack* stack, int* info){
+  if(!Stack_empty(stack)){
     *info = stack->inicio->info;
-    return 1;
-  } return 0;
-
+    return true;
+  } 
+  return false;
 }
-void Stack_destroy(Stack*);
-
-int Stack_full(Stack* stack){
-  return 0;
+void Stack_destroy(Stack* stack){
+  int temp;
+  while(Stack_pop(stack, &temp));
+  free(stack);
 }
-int Stack_empty(Stack* stack){
-  return (stack->qty == 0) ? 1 : 0;
+
+bool Stack_full(Stack* stack){
+  return false;
+}
+bool Stack_empty(Stack* stack){
+  return (stack->qty == 0);
 }
 int Stack_qty(Stack* stack){
   return stack->qty;
